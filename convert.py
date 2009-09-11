@@ -8,7 +8,7 @@ from google.appengine.ext import db
 class DbImage(db.Model):
   image = db.BlobProperty()
 
-class Swage(webapp.RequestHandler):
+class Convert(webapp.RequestHandler):
   def post(self):
     image = images.Image(self.request.get('image'))
     output_size = self.request.get('output_size')
@@ -21,7 +21,7 @@ class Swage(webapp.RequestHandler):
     db_image = DbImage()
     db_image.image = db.Blob(output_image)
     key = db_image.put()
-    self.redirect('/swage?key=%s' % key)
+    self.redirect('/convert?key=%s' % key)
 
   def get(self):
     key = self.request.get('key')
@@ -33,7 +33,7 @@ class Swage(webapp.RequestHandler):
       self.error(404)
 
 application = webapp.WSGIApplication([
-  ('/swage', Swage)
+  ('/convert', Convert)
 ], debug=True)
 
 def main():
