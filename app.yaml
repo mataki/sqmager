@@ -15,7 +15,13 @@ handlers:
   static_dir: static
 
 - url: /
-  script: upload.py
+  script: convert.py
 
 - url: /convert
+  script: convert.py
+
+- url: /upload
+  script: convert.py
+
+- url: /image
   script: convert.py
